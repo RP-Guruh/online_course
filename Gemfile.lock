@@ -87,6 +87,8 @@ GEM
       msgpack (~> 1.2)
     brakeman (6.2.2)
       racc
+    breadcrumbs_on_rails (4.1.0)
+      railties (>= 5.0)
     builder (3.3.0)
     capybara (3.40.0)
       addressable
@@ -244,6 +246,10 @@ GEM
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.2.1)
+    ransack (4.2.1)
+      activerecord (>= 6.1.5)
+      activesupport (>= 6.1.5)
+      i18n
     rdoc (6.8.1)
       psych (>= 4.0.0)
     regexp_parser (2.9.2)
@@ -356,6 +362,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   brakeman
+  breadcrumbs_on_rails (~> 4.1)
   capybara
   debug
   devise (~> 4.9)
@@ -366,6 +373,7 @@ DEPENDENCIES
   propshaft
   puma (>= 5.0)
   rails (~> 8.0.0)
+  ransack (~> 4.2)
   rubocop-rails-omakase
   selenium-webdriver
   solid_cable

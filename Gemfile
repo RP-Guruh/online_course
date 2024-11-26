@@ -63,3 +63,7 @@ group :test do
 end
 
 gem "devise", "~> 4.9"
+
+gem "breadcrumbs_on_rails", "~> 4.1"
+
+gem "ransack", "~> 4.2"
