@@ -1,4 +1,6 @@
 class CourseCategory < ApplicationRecord
+  attr_accessor :current_user
+
   before_create :set_user_save
   before_save :set_user_update
 
@@ -24,12 +26,16 @@ class CourseCategory < ApplicationRecord
   private
 
   def set_user_save
-    self.created_by = Current.user.id if Current.user
-    self.created_by_name = Current.user.email if Current.user
+    if current_user
+      self.created_by = current_user.id
+      self.created_by_name = current_user.email
+    end
   end
 
   def set_user_update
-    self.updated_by = Current.user.id if Current.user
-    self.updated_by_name = Current.user.email if Current.user
+    if current_user
+      self.updated_by = current_user.id
+      self.updated_by_name = current_user.email
+    end
   end
 end

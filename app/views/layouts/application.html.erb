@@ -2,7 +2,8 @@
 <html>
   <head>
     <title><%= content_for(:title) || "Rails Online Course" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="turbolinks-cache-control" content="no-preview">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
@@ -18,6 +19,7 @@
     <%= render "/layouts/partials/javascripti_imports" %>
   </head>
   <body class="boxed-size">
+    <%= render partial: "layouts/flash" %>
     <% unless @no_sidebar %>
       <%= render "/layouts/partials/sidebar" %>
     <% end %>

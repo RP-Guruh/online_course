@@ -1,47 +1,39 @@
-<%= form_with(model: course_category) do |form| %>
-  <% if course_category.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(course_category.errors.count, "error") %> prohibited this course_category from being saved:</h2>
-
-      <ul>
-        <% course_category.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<div class="align-middle d-flex justify-content-center modal_form" data-controller="confirmation" data-confirmation-target="modalForm">
+  <div class="col-lg-6">
+    <div class="card card_form bg-white border-1 rounded-3 mb-4">
+      <div class="card-body p-4">
+        <h4 class="fs-18 mb-4"><%= title %></h4>
+        <div class="tab-content" id="myTab3Content">
+          <div class="tab-pane fade show active" id="preview4-tab-pane" role="tabpanel" aria-labelledby="preview4-tab" tabindex="0">
+            <%= form_with model: course_category, local: true do |f| %>
+              <div class="form-group mb-4">
+                <%= f.label "Name *" %>
+                <%= f.text_field :name, class: "form-control text-dark", required: true %>
+              </div>
+              <div class="form-group mb-4">
+                <%= f.label :note %>
+                <%= f.text_area :note, class: "form-control text-dark" %>
+              </div>
+              <div class="form-group">
+                <button class="btn btn-primary" type="submit"
+              data-controller="confirmation"
+              data-action="click->confirmation#confirm"
+                  data-confirmation-title-after-confirm-value="Save it!"
+                  data-confirmation-text-after-confirm-value="Your file has been saved."
+                  data-confirmation-confirm-button-text-value="save"
+                  data-confirmation-message-value="Do you want to save this?"
+                  data-confirmation-url-value="/course_categories"
+                  >
+                  Save Data
+                </button>
+                <button class="btn btn-warning" type="button" data-action="confirmation#close">
+                  Cancel
+                </button>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
   </div>
-
-  <div>
-    <%= form.label :note, style: "display: block" %>
-    <%= form.textarea :note %>
-  </div>
-
-  <div>
-    <%= form.label :created_by, style: "display: block" %>
-    <%= form.number_field :created_by %>
-  </div>
-
-  <div>
-    <%= form.label :created_by_name, style: "display: block" %>
-    <%= form.text_field :created_by_name %>
-  </div>
-
-  <div>
-    <%= form.label :updated_by, style: "display: block" %>
-    <%= form.number_field :updated_by %>
-  </div>
-
-  <div>
-    <%= form.label :updated_by_name, style: "display: block" %>
-    <%= form.text_field :updated_by_name %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

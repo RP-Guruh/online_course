@@ -7,4 +7,49 @@
  * depending on specificity.
  *
  * Consider organizing styles into separate files for maintainability.
+ *= require sweetalert
  */
+ 
+ .modal_form {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Latar belakang semi-transparan */
+    justify-content: center; /* Untuk menempatkan secara horizontal di tengah */
+    align-items: center; /* Untuk menempatkan secara vertikal di tengah */
+    animation: fadeIn 0.3s ease-out; /* Animasi untuk kemunculan */
+  }
+
+
+  .modal_form.hidden {
+    visibility: hidden; /* Tidak terlihat */
+    opacity: 0;         /* Transparan */
+    transition: visibility 0s linear 0.3s, opacity 0.3s linear;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0; /* Awalnya transparan */
+    }
+    to {
+      opacity: 1; /* Menjadi sepenuhnya terlihat */
+    }
+  }
+  
+  .card_form {
+    transform: scale(1); /* Awal modal lebih kecil */
+    animation: scaleUp 0.3s ease-out; /* Animasi untuk membesar */
+  }
+  
+  @keyframes scaleUp {
+    from {
+      transform: scale(0.7); /* Awalnya kecil */
+    }
+    to {
+      transform: scale(1); /* Menjadi ukuran penuh */
+    }
+  }
+  
+  

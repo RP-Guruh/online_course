@@ -1,4 +1,5 @@
 class CourseCategoriesController < ApplicationController
+  include Pagy::Backend
   before_action :authenticate_user!
   before_action :set_course_category, only: %i[ show edit update destroy ]
 
@@ -9,12 +10,16 @@ class CourseCategoriesController < ApplicationController
   def index
     @course_title = "Course Category List"
     @q = CourseCategory.ransack(params[:q])
-    @course_categories = @q.result(distinct: true)
+    @course_categories = @q.result(distinct: true).order(id: "DESC")
+    unless @course_categories.empty?
+      @pagy, @course_categories = pagy(@q.result(distinct: true), items: 10)
+    end
     add_breadcrumb "index", course_categories_path
   end
 
   # GET /course_categories/1 or /course_categories/1.json
   def show
+    # @course_category = CourseCategory.find(3)
   end
 
   # GET /course_categories/new
@@ -34,6 +39,7 @@ class CourseCategoriesController < ApplicationController
       if @course_category.save
         format.html { redirect_to @course_category, notice: "Course category was successfully created." }
         format.json { render :show, status: :created, location: @course_category }
+        format.turbo_stream
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @course_category.errors, status: :unprocessable_entity }
@@ -45,8 +51,9 @@ class CourseCategoriesController < ApplicationController
   def update
     respond_to do |format|
       if @course_category.update(course_category_params)
-        format.html { redirect_to @course_category, notice: "Course category was successfully updated." }
+        format.html { redirect_to course_category_path, notice: "Course category was successfully updated." }
         format.json { render :show, status: :ok, location: @course_category }
+        format.turbo_stream
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @course_category.errors, status: :unprocessable_entity }
@@ -59,7 +66,7 @@ class CourseCategoriesController < ApplicationController
     @course_category.destroy!
 
     respond_to do |format|
-      format.html { redirect_to course_categories_path, status: :see_other, notice: "Course category was successfully destroyed." }
+      format.html { redirect_to course_categories_url }
       format.json { head :no_content }
     end
   end
@@ -73,6 +80,6 @@ class CourseCategoriesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def course_category_params
-    params.expect(course_category: [:name, :note, :created_by, :created_by_name, :updated_by, :updated_by_name])
+    params.expect(course_category: [:name, :note])
   end
 end
