@@ -1,0 +1,93 @@
+<div class="main-content-container overflow-hidden">
+  <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+    <h3 class="mb-0">Sub Categories</h3>
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb align-items-center mb-0 lh-1">
+        <li class="breadcrumb-item">
+          <%= render_breadcrumbs %>
+        </li>
+      </ol>
+    </nav>
+  </div>
+  <div class="card bg-white border-0 rounded-3 mb-4">
+    <div class="card-body p-0">
+      <div class="p-4">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+          <div class="form-group mb-4 position-relative">
+            <%= search_form_for @q do |f| %>
+              <%= f.search_field :name_cont, class: "form-control h-55 bg-body-bg border-0 text-dark rounded-pill", placeholder: "Search here.." %>
+              <%= f.submit "Search", class: "position-absolute top-50 end-0 translate-middle-y bg-primary p-0 border-0 text-center text-white rounded-pill px-3 py-2 me-2 fw-semibold" %>
+            <% end %>
+          </div>
+          <div class="form-group mb-4 position-relative">
+            <%= link_to "New data", new_course_sub_category_path, 
+                class:"text-decoration-none translate-middle-y bg-primary p-0 border-0 text-center text-white rounded-pill px-3 py-2 me-2 fw-semibold",
+                data: { turbo_frame: "new_course_sub_category"}
+            %>
+          </div>
+        </div>
+      </div>
+      <div class="p-4 pt-lg-4">
+        <div class="d-flex justify-content-center justify-content-sm-between align-items-center text-center flex-wrap gap-2 showing-wrap">
+          <span class="fs-12 fw-medium">
+            <% if @course_sub_categories.count >= 1 %>
+              <% if @pagy.pages >= 1 %>
+                <div class="pagination-info">
+                  Showing <%= @pagy.offset + 1 %> to <%= [@pagy.offset + @pagy.vars[:items], @pagy.count].min %> of <%= @pagy.count %>
+                </div>
+              <% end %>
+            <% end %>
+          </span>
+          <nav aria-label="Page navigation example">
+            <% if @course_sub_categories.count >= 1 %>
+              <%== pagy_bootstrap_nav(@pagy) %>
+            <% end %>
+          </nav>
+        </div>
+      </div>
+      <div class="default-table-area style-two all-projects">
+        <%= turbo_frame_tag "new_course_sub_category" %>
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Sub Category Name</th>
+                <th scope="col">Noted</th>
+                <th scope="col">Category</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody id="course_sub_categories">
+              <% if @course_sub_categories.empty? %>
+                <tr>
+                  <td class="text-body" colspan="4" style="text-align: center;">Data is empty</td>
+                </tr>
+              <% else %>
+                <%= render @course_sub_categories%>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class="p-4 pt-lg-4">
+          <div class="d-flex justify-content-center justify-content-sm-between align-items-center text-center flex-wrap gap-2 showing-wrap">
+            <span class="fs-12 fw-medium">
+              <% if @course_sub_categories.count >= 1 %>
+                <% if @pagy.pages >= 1 %>
+                  <div class="pagination-info">
+                    Showing <%= @pagy.offset + 1 %> to <%= [@pagy.offset + @pagy.vars[:items], @pagy.count].min %> of <%= @pagy.count %>
+                  </div>
+                <% end %>
+              <% end %>
+            </span>
+            <nav aria-label="Page navigation example">
+              <% if @course_sub_categories.count >= 1 %>
+                <%== pagy_bootstrap_nav(@pagy) %>
+              <% end %>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

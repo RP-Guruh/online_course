@@ -23,23 +23,27 @@
     <% unless @no_sidebar %>
       <%= render "/layouts/partials/sidebar" %>
     <% end %>
-    <div class="container-fluid">
-      <div class="main-content d-flex flex-column">
-        <% unless @no_navbar %>
-          <%= render "/layouts/partials/navbar" %>
-        <% end %>
-        <%= yield %>
-        <div class="flex-grow-1"></div>
-        <% unless @no_footer %>
-          <%= render "/layouts/partials/footer" %>
-        <% end %>
-        <% unless @no_create_task %>
-          <%= render "/layouts/partials/create_task" %>
-        <% end %>
-        <% unless @no_settings %>
-          <%= render "/layouts/partials/settings" %>
-        <% end %>
+    <% if controller_name != "errors" %>
+      <div class="container-fluid">
+        <div class="main-content d-flex flex-column">
+          <% unless @no_navbar %>
+            <%= render "/layouts/partials/navbar" %>
+          <% end %>
+          <%= yield %>
+          <div class="flex-grow-1"></div>
+          <% unless @no_footer %>
+            <%= render "/layouts/partials/footer" %>
+          <% end %>
+          <% unless @no_create_task %>
+            <%= render "/layouts/partials/create_task" %>
+          <% end %>
+          <% unless @no_settings %>
+            <%= render "/layouts/partials/settings" %>
+          <% end %>
+        </div>
       </div>
-    </div>
+    <% else %>
+      <%= yield %>
+    <% end %>
   </body>
 </html>

@@ -1,0 +1,27 @@
+<%= content_tag :tr, id: dom_id(course_sub_category) do %>
+  <td class="text-body">#<%= course_sub_category.id %></td>
+  <td class="text-body"><%= course_sub_category.name %></td>
+  <td class="text-body"><%= course_sub_category.note %></td>
+  <td class="text-body"><%= get_name_category(course_sub_category.course_category_id) %></td>
+  <td>
+    <div class="d-flex align-items-center gap-1">
+      <%= link_to course_sub_category, class: 'ps-0 border-0 bg-transparent lh-1 position-relative top-2', data: {turbo_frame: "new_course_sub_category" } do%>
+        <i class="material-symbols-outlined fs-16 text-primary">visibility</i>
+      <% end %>
+      <%= link_to edit_course_sub_category_path(course_sub_category), class: "ps-0 border-0 bg-transparent lh-1 position-relative top-2", data: { turbo_frame: "new_course_sub_category"} do %>
+        <i class="material-symbols-outlined fs-16 text-body">edit</i>
+      <% end %>
+      <%= button_to course_sub_category, method: :delete, form_class: 'delete-button', class:"ps-0 border-0 bg-transparent lh-1 position-relative top-2", data: { 
+                      controller: "confirmation", 
+                      action: "click->confirmation#deleteForm", 
+                      confirmation_title_after_confirm_value: "Delete it!",
+                      confirmation_text_after_confirm_value: "Your data has been deleted.",
+                      confirmation_confirm_button_text_value: "Delete",
+                      confirmation_message_value: "Do you want to delete this?",
+                      confirmation_type_value: "delete"
+                    } do %>
+        <i class="material-symbols-outlined fs-16 text-danger">delete</i>
+      <% end %>
+    </div>
+  </td>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_26_132614) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_07_061054) do
   create_table "course_categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.text "note"
@@ -20,6 +20,15 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_26_132614) do
     t.string "updated_by_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "course_sub_categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.text "note"
+    t.bigint "course_category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_category_id"], name: "index_course_sub_categories_on_course_category_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -33,4 +42,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_26_132614) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "course_sub_categories", "course_categories"
 end

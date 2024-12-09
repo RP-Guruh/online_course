@@ -1,0 +1,4 @@
+<%= turbo_frame_tag 'new_course_sub_category' do %>
+  <% content_for :title, "Editing course sub category" %>
+  <%= render "form", course_sub_category: @course_sub_category, title: "Edit course sub category" %>
+<% end %>

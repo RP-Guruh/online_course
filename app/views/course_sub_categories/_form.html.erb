@@ -5,17 +5,22 @@
         <h4 class="fs-18 mb-4"><%= title %></h4>
         <div class="tab-content" id="myTab3Content">
           <div class="tab-pane fade show active" id="preview4-tab-pane" role="tabpanel" aria-labelledby="preview4-tab" tabindex="0">
-            <%= form_with model: course_category, local: true do |f| %>
+            <%= form_with model: course_sub_category, local: true do |f| %>
               <div class="form-group mb-4">
-                <%= f.label "Name *" %>
+                <%= f.label "Name *", class: 'mb-2' %>
                 <%= f.text_field :name, class: "form-control text-dark", required: true %>
               </div>
               <div class="form-group mb-4">
-                <%= f.label :note %>
+                <%= f.label :note, class: 'mb-2' %>
                 <%= f.text_area :note, class: "form-control text-dark" %>
               </div>
+              <div class="form-group mb-4">
+                <%= f.label "Category *", class: 'mb-2' %>
+                <%= f.collection_select :course_category_id, @categories, :id, :name, { prompt: "Select a category" }, 
+                            { class: "form-select form-control h-44", aria: { label: "Default select example" } } %>
+              </div>
               <div class="form-group">
-                <%= render(ButtonSaveComponent.new(redirect: "/course_categories")) %>
+                <%= render(ButtonSaveComponent.new(redirect: "/course_sub_categories")) %>
                 <%= render(ButtonCancelModalComponent.new) %>
               </div>
             <% end %>
